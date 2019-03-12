@@ -4,8 +4,18 @@ describe Shop do
   let(:shop) { described_class.new }
 
   describe '#checkout' do
-    it 'returns -1 for an invalid string' do
-      expect(shop.checkout('aBc')).to eq -1
+    context 'invalid inputs' do
+      it 'returns -1 for "aBc"' do
+        expect(shop.checkout('aBc')).to eq -1
+      end
+
+      it 'returns -1 for "-B8x"' do
+        expect(shop.checkout('-B8x')).to eq -1
+      end
+
+      it 'returns -1 for 18' do
+        expect(shop.checkout(18)).to eq -1
+      end
     end
 
     it 'returns 50 for "A"' do
