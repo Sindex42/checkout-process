@@ -11,5 +11,9 @@ describe Shop do
     it 'returns 50 for "A"' do
       expect(shop.checkout('A')).to eq 50
     end
+
+    it 'returns 100 for "AA"' do
+      expect(shop.checkout('AA')).to eq 100
+    end
   end
 end
