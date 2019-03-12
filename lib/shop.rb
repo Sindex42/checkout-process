@@ -4,10 +4,11 @@ class Shop
     result = 0
 
     split_string.each do |character|
-      result += 50 if character == 'A'
-    end
+      return -1 if character != 'A' && character != 'B'
 
-    return -1 if result == 0  
+      result += 50 if character == 'A'
+      result += 30 if character == 'B'
+    end
 
     result
   end
