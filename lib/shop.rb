@@ -1,9 +1,11 @@
 class Shop
-  def checkout(string)
-    split_string = string.split('')
+  def checkout(input)
+    return -1 unless input.is_a?(String)
+
+    split_string = input.split('')
     result = 0
 
-    split_string.each do |character|
+    split_string.map do |character|
       return -1 if character != 'A' && character != 'B'
 
       result += 50 if character == 'A'
