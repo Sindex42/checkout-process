@@ -20,9 +20,9 @@ class Shop
       result += 20 if character == 'C'
       result += 15 if character == 'D'
 
-      result -= 20 * (a_count / 3)
     end
 
+    result -= 20 * (a_count / 3)
     result
   end
 end
