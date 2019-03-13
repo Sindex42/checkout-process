@@ -1,9 +1,9 @@
 class Shop
-  PRICE_LIST = {
-    'A' => 50,
-    'B' => 30,
-    'C' => 20,
-    'D' => 15
+  ITEMS = {
+    'A' => {price: 50, offer_amount: 3, discount: 20},
+    'B' => {price: 30, offer_amount: 2, discount: 15},
+    'C' => {price: 20},
+    'D' => {price: 15}
   }
 
   def checkout(input)
@@ -16,22 +16,24 @@ class Shop
 
     return -1 unless input.is_a?(String)
 
-    split_string = input.split('')
     result = 0
+    input.split('').map do |character|
+      return -1 unless ITEMS.include?(character)
 
-    split_string.map do |character|
-      return -1 unless PRICE_LIST.include?(character)
-
-      PRICE_LIST.each do |item, price|
+      ITEMS.each do |item, data|
         if character == item
-          result += price
+          result += data[:price]
           item_count[character] += 1
         end
       end
     end
 
-    result -= 20 * (item_count['A'] / 3)
-    result -= 15 * (item_count['B'] / 2)
+    ITEMS.each do |item, data|
+      if data[:offer_amount]
+        result -= data[:discount] * (item_count[item] / data[:offer_amount])
+      end
+    end
+
     result
   end
 end
