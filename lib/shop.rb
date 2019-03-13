@@ -1,5 +1,5 @@
 class Shop
-  ITEMS = %w[A B C]
+  ITEMS = %w[A B C D]
 
   def checkout(input)
     return -1 unless input.is_a?(String)
@@ -13,6 +13,7 @@ class Shop
       result += 50 if character == 'A'
       result += 30 if character == 'B'
       result += 20 if character == 'C'
+      result += 15 if character == 'D'
     end
 
     result
