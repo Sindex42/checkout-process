@@ -6,14 +6,21 @@ class Shop
 
     split_string = input.split('')
     result = 0
+    a_count = 0
 
     split_string.map do |character|
       return -1 unless ITEMS.include?(character)
 
-      result += 50 if character == 'A'
+      if character == 'A'
+        result += 50
+        a_count += 1
+      end
+
       result += 30 if character == 'B'
       result += 20 if character == 'C'
       result += 15 if character == 'D'
+
+      result -= 20 * (a_count / 3)
     end
 
     result

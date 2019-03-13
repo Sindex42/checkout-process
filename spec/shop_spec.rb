@@ -1,7 +1,7 @@
 require 'shop'
 
 describe Shop do
-  let(:shop) { described_class.new }
+  subject(:shop) { described_class.new }
 
   describe '#checkout' do
     context 'invalid inputs' do
@@ -18,28 +18,36 @@ describe Shop do
       end
     end
 
-    it 'returns 50 for "A"' do
-      expect(shop.checkout('A')).to eq 50
+    context 'non special offers' do
+      it 'returns 50 for "A"' do
+        expect(shop.checkout('A')).to eq 50
+      end
+
+      it 'returns 100 for "AA"' do
+        expect(shop.checkout('AA')).to eq 100
+      end
+
+      it 'returns 30 for "B"' do
+        expect(shop.checkout('B')).to eq 30
+      end
+
+      it 'returns 20 for "C"' do
+        expect(shop.checkout('C')).to eq 20
+      end
+
+      it 'returns 15 for "D"' do
+        expect(shop.checkout('D')).to eq 15
+      end
+
+      it 'returns 115 for "ABCD"' do
+        expect(shop.checkout('ABCD')).to eq 115
+      end
     end
 
-    it 'returns 100 for "AA"' do
-      expect(shop.checkout('AA')).to eq 100
-    end
-
-    it 'returns 30 for "B"' do
-      expect(shop.checkout('B')).to eq 30
-    end
-
-    it 'returns 20 for "C"' do
-      expect(shop.checkout('C')).to eq 20
-    end
-
-    it 'returns 15 for "D"' do
-      expect(shop.checkout('D')).to eq 15
-    end
-
-    it 'returns 115 for "ABCD"' do
-      expect(shop.checkout('ABCD')).to eq 115
+    context 'special offers' do
+      it 'returns 130 for "AAA"' do
+        expect(shop.checkout('AAA')).to eq 130
+      end
     end
   end
 end
