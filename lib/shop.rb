@@ -1,32 +1,37 @@
 class Shop
-  ITEMS = %w[A B C D]
+  PRICE_LIST = {
+    'A' => 50,
+    'B' => 30,
+    'C' => 20,
+    'D' => 15
+  }
 
   def checkout(input)
+    item_count = {
+      'A' => 0,
+      'B' => 0,
+      'C' => 0,
+      'D' => 0
+    }
+
     return -1 unless input.is_a?(String)
 
     split_string = input.split('')
-    result = a_count = b_count = 0
+    result = 0
 
     split_string.map do |character|
-      return -1 unless ITEMS.include?(character)
+      return -1 unless PRICE_LIST.include?(character)
 
-      if character == 'A'
-        result += 50
-        a_count += 1
+      PRICE_LIST.each do |item, price|
+        if character == item
+          result += price
+          item_count[character] += 1
+        end
       end
-
-      if character == 'B'
-        result += 30
-        b_count += 1
-      end
-
-      result += 20 if character == 'C'
-      result += 15 if character == 'D'
-
     end
 
-    result -= 20 * (a_count / 3)
-    result -= 15 * (b_count / 2)
+    result -= 20 * (item_count['A'] / 3)
+    result -= 15 * (item_count['B'] / 2)
     result
   end
 end
