@@ -37,5 +37,9 @@ describe Shop do
     it 'returns 15 for "D"' do
       expect(shop.checkout('D')).to eq 15
     end
+
+    it 'returns 115 for "ABCD"' do
+      expect(shop.checkout('ABCD')).to eq 115
+    end
   end
 end
